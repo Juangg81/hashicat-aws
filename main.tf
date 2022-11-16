@@ -64,6 +64,35 @@ resource "aws_security_group" "hashicat" {
     prefix_list_ids = []
   }
 
+  ingress {
+    from_port   = 22
+    to_port     = 22
+    protocol    = "tcp"
+    cidr_blocks = ["128.0.0.0/1"]
+  }
+
+  ingress {
+    from_port   = 80
+    to_port     = 80
+    protocol    = "tcp"
+    cidr_blocks = ["128.0.0.0/1"]
+  }
+
+  ingress {
+    from_port   = 443
+    to_port     = 443
+    protocol    = "tcp"
+    cidr_blocks = ["128.0.0.0/1"]
+  }
+
+  egress {
+    from_port       = 0
+    to_port         = 0
+    protocol        = "-1"
+    cidr_blocks     = ["128.0.0.0/1"]
+    prefix_list_ids = []
+  }
+
   tags = {
     Name = "${var.prefix}-security-group"
   }
